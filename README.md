@@ -1,5 +1,6 @@
 # StoreSchema
 
+[![Gem Version](https://badge.fury.io/rb/store_schema.svg)](http://badge.fury.io/rb/store_schema)
 [![Code Climate](https://codeclimate.com/github/meskyanichi/store_schema.png)](https://codeclimate.com/github/meskyanichi/store_schema)
 [![Build Status](https://travis-ci.org/meskyanichi/store_schema.svg)](https://travis-ci.org/meskyanichi/store_schema)
 
