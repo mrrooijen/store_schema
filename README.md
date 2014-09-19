@@ -20,7 +20,7 @@ The documentation can be found on [RubyDoc].
 
 ### Installation
 
-Distributed at a gem, hosted at [RubyGems.org].
+Add the gem to your Gemfile and run `bundle`.
 
 ```rb
 gem "store_schema"
