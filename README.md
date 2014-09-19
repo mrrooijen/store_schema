@@ -8,6 +8,8 @@ StoreSchema, for Rails/ActiveRecord 4.0.0+, enhances `ActiveRecord::Base.store_a
 
 This library was developed for- and extracted from [HireFire].
 
+The documentation can be found on [RubyDoc].
+
 
 ### Compatibility
 
@@ -153,6 +155,7 @@ Released under the MIT [License].
 [HireFire]: http://hirefire.io
 [Passing Specs]: https://travis-ci.org/meskyanichi/store_schema
 [Code Climate Score]: https://codeclimate.com/github/meskyanichi/store_schema
+[RubyDoc]: http://rubydoc.info/gems/store_schema
 [License]: https://github.com/meskyanichi/store_schema/blob/master/LICENSE
 [RubyGems.org]: https://rubygems.org/gems/store_schema
 [PostgreSQL's HStore Extension]: http://www.postgresql.org/docs/9.3/static/hstore.html
