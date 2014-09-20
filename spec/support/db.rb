@@ -1,4 +1,3 @@
-ActiveRecord::Base.logger = Logger.new(LOG_PATH)
 ActiveRecord::Base.establish_connection(
   adapter: "sqlite3", database: ":memory:"
 )

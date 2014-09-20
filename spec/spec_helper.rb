@@ -9,13 +9,6 @@ require "store_schema"
 require File.expand_path("../support/models", __FILE__)
 
 RSpec.configure do |config|
-  config.mock_framework = :mocha
-
-  config.before do
-    DatabaseCleaner.start
-  end
-
-  config.after do
-    DatabaseCleaner.clean
-  end
+  config.before { DatabaseCleaner.start }
+  config.after { DatabaseCleaner.clean }
 end
