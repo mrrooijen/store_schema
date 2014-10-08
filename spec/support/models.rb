@@ -1,6 +1,6 @@
 class Website < ActiveRecord::Base
 
-  serialize :config
+  store :config, coder: JSON
 
   store_schema :config do |s|
     s.string :name
