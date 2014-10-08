@@ -40,10 +40,13 @@ class Website < ActiveRecord::Base
   # Tell ActiveRecord that we want to serialize the :config attribute
   # and store the serialized data as text in the config column.
   #
-  # If you're using PostreSQL's "hstore" column-type instead of the
-  # "text" column-type, you don't have to define `serialize :config`.
+  # By default, `store` serializes your data as YAML. You can swap this out for
+  # any other coder you want. For example JSON or Oj (high performance JSON).
   #
-  serialize :config
+  # If you're using PostgreSQL's hstore or json column-type instead of the
+  # text column-type, you should'nt define `store :config`.
+  #
+  store :config, coder: JSON
 
   # Define a schema for the store. This syntax is similar to
   # ActiveRecord::Migration.
@@ -103,7 +106,8 @@ See above example.
 If you need to be able to query these serialized attributes,
 consider using [PostgreSQL's HStore Extension]. If you do not need to
 be able to query the serialized data, you can simply use a text-type column
-and use the `serialize` method in your model which works with any SQL database.
+and use the `store <column>[, coder: JSON]` method in your model which works
+with any SQL database.
 
 
 ### Contributing
