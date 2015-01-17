@@ -1,7 +1,6 @@
 require_relative "base"
 
-class StoreSchema::Converter::DateTime
-  include StoreSchema::Converter::Base
+class StoreSchema::Converter::DateTime < StoreSchema::Converter::Base
 
   # @return [String] the database format for storing a DateTime object.
   #

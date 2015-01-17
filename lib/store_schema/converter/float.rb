@@ -1,7 +1,6 @@
 require_relative "base"
 
-class StoreSchema::Converter::Float
-  include StoreSchema::Converter::Base
+class StoreSchema::Converter::Float < StoreSchema::Converter::Base
 
   # Converts the {#value} to a database-storable value.
   #

@@ -1,7 +1,6 @@
 require_relative "base"
 
-class StoreSchema::Converter::String
-  include StoreSchema::Converter::Base
+class StoreSchema::Converter::String < StoreSchema::Converter::Base
 
   # Simply returns {#value} if it's a String.
   #

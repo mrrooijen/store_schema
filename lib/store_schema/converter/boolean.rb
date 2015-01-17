@@ -1,7 +1,6 @@
 require_relative "base"
 
-class StoreSchema::Converter::Boolean
-  include StoreSchema::Converter::Base
+class StoreSchema::Converter::Boolean < StoreSchema::Converter::Base
 
   # @return [String] the database representation of a true value.
   #

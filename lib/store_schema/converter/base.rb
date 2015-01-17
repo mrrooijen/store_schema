@@ -1,4 +1,4 @@
-module StoreSchema::Converter::Base
+class StoreSchema::Converter::Base
 
   # @return [Object]
   #
