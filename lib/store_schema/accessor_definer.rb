@@ -1,5 +1,4 @@
 class StoreSchema::AccessorDefiner
-  class InvalidValueType < StandardError; end
 
   # @return [Class]
   #
@@ -64,25 +63,15 @@ class StoreSchema::AccessorDefiner
   # Enhances the store setter by adding data conversion capabilities.
   #
   def define_setter
-    _klass = klass
-    _column = column
     _type = type
-    _attribute = attribute
 
     klass.send(:define_method, "#{attribute}=") do |value|
-      if value.is_a?(NilClass)
-        super(value)
-      else
-        converted_value = StoreSchema::Converter
-          .new(value, _type).to_db
+      converted_value = StoreSchema::Converter.new(value, _type).to_db
 
-        if converted_value
-          super(converted_value)
-        else
-          raise InvalidValueType,
-            "#{value} (#{value.class}) for " +
-            "#{_klass}##{_column}.#{_attribute} (#{_type})"
-        end
+      if converted_value
+        super(converted_value)
+      else
+        super(nil)
       end
     end
   end

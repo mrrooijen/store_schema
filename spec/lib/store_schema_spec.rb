@@ -19,12 +19,9 @@ RSpec.describe "StoreSchema" do
       expect(website.reload.name).to eq("Store Schema")
     end
 
-    it "does not accept invalid data types" do
-      expect { website.update_attribute(:name, true) }
-        .to raise_error(
-          StoreSchema::AccessorDefiner::InvalidValueType,
-          "true (TrueClass) for Website#config.name (string)"
-        )
+    it "should convert to nil if incompatible type" do
+      website.update_attribute(:name, true)
+      expect(website.name).to eq(nil)
     end
   end
 
@@ -42,20 +39,14 @@ RSpec.describe "StoreSchema" do
       expect(website.visitors).to eq(1337)
     end
 
-    it "does not accept invalid string formats" do
-      expect { website.update_attribute(:visitors, "abc") }
-        .to raise_error(
-          StoreSchema::AccessorDefiner::InvalidValueType,
-          "abc (String) for Website#config.visitors (integer)"
-        )
+    it "should convert to nil if incompatible value" do
+      website.update_attribute(:visitors, "abc")
+      expect(website.visitors).to eq(nil)
     end
 
-    it "does not accept invalid data types" do
-      expect { website.update_attribute(:visitors, true) }
-        .to raise_error(
-          StoreSchema::AccessorDefiner::InvalidValueType,
-          "true (TrueClass) for Website#config.visitors (integer)"
-        )
+    it "should convert to nil if incompatible type" do
+      website.update_attribute(:visitors, true)
+      expect(website.visitors).to eq(nil)
     end
   end
 
@@ -85,20 +76,14 @@ RSpec.describe "StoreSchema" do
       expect(website.apdex).to eq(1.0)
     end
 
-    it "does not accept invalid string formats" do
-      expect { website.update_attribute(:apdex, "abc") }
-        .to raise_error(
-          StoreSchema::AccessorDefiner::InvalidValueType,
-          "abc (String) for Website#config.apdex (float)"
-        )
+    it "should convert to nil if incompatible value" do
+      website.update_attribute(:apdex, "abc")
+      expect(website.apdex).to eq(nil)
     end
 
-    it "does not accept invalid data types" do
-      expect { website.update_attribute(:apdex, true) }
-        .to raise_error(
-          StoreSchema::AccessorDefiner::InvalidValueType,
-          "true (TrueClass) for Website#config.apdex (float)"
-        )
+    it "should convert to nil if incompatible type" do
+      website.update_attribute(:apdex, true)
+      expect(website.apdex).to eq(nil)
     end
   end
 
@@ -118,12 +103,9 @@ RSpec.describe "StoreSchema" do
       end
     end
 
-    it "does not accept invalid data types" do
-      expect { website.update_attribute(:ssl, "abc") }
-        .to raise_error(
-          StoreSchema::AccessorDefiner::InvalidValueType,
-          "abc (String) for Website#config.ssl (boolean)"
-        )
+    it "should convert to nil if incompatible type" do
+      website.update_attribute(:ssl, "abc")
+      expect(website.ssl).to eq(nil)
     end
   end
 
@@ -153,20 +135,14 @@ RSpec.describe "StoreSchema" do
       expect(website.published_at.class).to eq(DateTime)
     end
 
-    it "does not accept invalid string formats" do
-      expect { website.update_attribute(:published_at, "abc") }
-        .to raise_error(
-          StoreSchema::AccessorDefiner::InvalidValueType,
-          "abc (String) for Website#config.published_at (datetime)"
-        )
+    it "should convert to nil if incompatible value" do
+      website.update_attribute(:published_at, "abc")
+      expect(website.published_at).to eq(nil)
     end
 
-    it "does not accept invalid data types" do
-      expect { website.update_attribute(:published_at, true) }
-        .to raise_error(
-          StoreSchema::AccessorDefiner::InvalidValueType,
-          "true (TrueClass) for Website#config.published_at (datetime)"
-        )
+    it "should convert to nil if incompatible type" do
+      website.update_attribute(:published_at, true)
+      expect(website.published_at).to eq(nil)
     end
   end
 end
