@@ -156,14 +156,13 @@ Submit a pull request.
 
 ### Author / License
 
-Copyright (c) 2015 Michael van Rooijen ( [@meskyanichi] )<br />
-Released under the MIT [License].
+Released under the [MIT License] by [Michael van Rooijen].
 
-[@meskyanichi]: https://twitter.com/meskyanichi
+[Michael van Rooijen]: https://twitter.com/meskyanichi
 [HireFire]: http://hirefire.io
 [Passing Specs]: https://travis-ci.org/meskyanichi/store_schema
 [Code Climate Score]: https://codeclimate.com/github/meskyanichi/store_schema
 [RubyDoc]: http://rubydoc.info/github/meskyanichi/store_schema/master/frames
-[License]: https://github.com/meskyanichi/store_schema/blob/master/LICENSE
+[MIT License]: https://github.com/meskyanichi/store_schema/blob/master/LICENSE
 [RubyGems.org]: https://rubygems.org/gems/store_schema
 [PostgreSQL's HStore Extension]: http://www.postgresql.org/docs/9.3/static/hstore.html
