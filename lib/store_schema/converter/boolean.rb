@@ -30,7 +30,7 @@ class StoreSchema::Converter::Boolean < StoreSchema::Converter::Base
   #
   def to_db
     if TRUE_VALUES.include?(value)
-      "t"
+      DB_TRUE_VALUE
     elsif FALSE_VALUES.include?(value)
       "f"
     else
