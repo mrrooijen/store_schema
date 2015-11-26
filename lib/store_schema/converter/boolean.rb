@@ -6,6 +6,10 @@ class StoreSchema::Converter::Boolean < StoreSchema::Converter::Base
   #
   DB_TRUE_VALUE = "t"
 
+  # @return [String] the database representation of a false value.
+  #
+  DB_FALSE_VALUE = "f"
+
   # @return [Array] all the values that are considered to be truthy.
   #
   TRUE_VALUES = [true, 1, "1", "t", "T", "true", "TRUE", "on", "ON"]
@@ -30,9 +34,9 @@ class StoreSchema::Converter::Boolean < StoreSchema::Converter::Base
   #
   def to_db
     if TRUE_VALUES.include?(value)
-      "t"
+      DB_TRUE_VALUE
     elsif FALSE_VALUES.include?(value)
-      "f"
+      DB_FALSE_VALUE
     else
       false
     end
