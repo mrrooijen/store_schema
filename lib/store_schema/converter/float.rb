@@ -2,6 +2,10 @@ require_relative "base"
 
 class StoreSchema::Converter::Float < StoreSchema::Converter::Base
 
+  # @return [Regexp] an (int | float) value format.
+  #
+  INT_FLOAT_FORMAT = /^\d+|\d+\.\d+$/
+
   # Converts the {#value} to a database-storable value.
   #
   # @return [String, false] false if {#value} is an invalid date-type.
@@ -13,7 +17,7 @@ class StoreSchema::Converter::Float < StoreSchema::Converter::Base
     when ::Float
       value.to_s
     when ::String
-      if value =~ /^\d+|\d+\.\d+$/
+      if value.match(INT_FLOAT_FORMAT)
         value.to_f.to_s
       else
         false
