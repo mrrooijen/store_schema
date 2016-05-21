@@ -1,8 +1,8 @@
 # Store Schema
 
 [![Gem Version](https://badge.fury.io/rb/store_schema.svg)](http://badge.fury.io/rb/store_schema)
-[![Code Climate](https://codeclimate.com/github/meskyanichi/store_schema.png)](https://codeclimate.com/github/meskyanichi/store_schema)
-[![Build Status](https://travis-ci.org/meskyanichi/store_schema.svg)](https://travis-ci.org/meskyanichi/store_schema)
+[![Code Climate](https://codeclimate.com/github/mrrooijen/store_schema.png)](https://codeclimate.com/github/mrrooijen/store_schema)
+[![Build Status](https://travis-ci.org/mrrooijen/store_schema.svg)](https://travis-ci.org/mrrooijen/store_schema)
 
 StoreSchema, for Rails/ActiveRecord 4.0.0+, enhances `ActiveRecord::Base.store_accessor` with data conversion capabilities.
 
@@ -158,11 +158,11 @@ Submit a pull request.
 
 Released under the [MIT License] by [Michael van Rooijen].
 
-[Michael van Rooijen]: https://twitter.com/meskyanichi
+[Michael van Rooijen]: https://twitter.com/mrrooijen
 [HireFire]: http://hirefire.io
-[Passing Specs]: https://travis-ci.org/meskyanichi/store_schema
-[Code Climate Score]: https://codeclimate.com/github/meskyanichi/store_schema
-[RubyDoc]: http://rubydoc.info/github/meskyanichi/store_schema/master/frames
-[MIT License]: https://github.com/meskyanichi/store_schema/blob/master/LICENSE
+[Passing Specs]: https://travis-ci.org/mrrooijen/store_schema
+[Code Climate Score]: https://codeclimate.com/github/mrrooijen/store_schema
+[RubyDoc]: http://rubydoc.info/github/mrrooijen/store_schema/master/frames
+[MIT License]: https://github.com/mrrooijen/store_schema/blob/master/LICENSE
 [RubyGems.org]: https://rubygems.org/gems/store_schema
 [PostgreSQL's HStore Extension]: http://www.postgresql.org/docs/9.3/static/hstore.html

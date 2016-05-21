@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Michael van Rooijen"]
   spec.email = ["michael@vanrooijen.io"]
   spec.summary = %q{Enhances ActiveRecord::Base.store_accessor with data conversion capabilities.}
-  spec.homepage = "http://meskyanichi.github.io/store_schema/"
+  spec.homepage = "http://mrrooijen.github.io/store_schema/"
   spec.license = "MIT"
 
   spec.files = `git ls-files -z`.split("\x0")
