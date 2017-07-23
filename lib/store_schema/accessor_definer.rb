@@ -32,6 +32,7 @@ class StoreSchema::AccessorDefiner
   #
   def define
     define_store_accessor
+    define_attribute
     define_getter
     define_setter
   end
@@ -42,6 +43,12 @@ class StoreSchema::AccessorDefiner
   #
   def define_store_accessor
     klass.store_accessor(column, attribute)
+  end
+
+  # Defines the attribute on the class using the {.attribute}.
+  #
+  def define_attribute
+    klass.attribute(attribute)
   end
 
   # Enhances the store getter by adding data conversion capabilities.

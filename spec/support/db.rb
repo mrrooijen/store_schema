@@ -2,7 +2,7 @@ ActiveRecord::Base.establish_connection(
   adapter: "sqlite3", database: ":memory:"
 )
 
-class Schema < ActiveRecord::Migration
+class Schema < ActiveRecord::Migration[4.2]
 
   def change
     create_table :websites do |t|
@@ -11,6 +11,4 @@ class Schema < ActiveRecord::Migration
   end
 end
 
-silence_stream(STDOUT) do
-  Schema.new.change
-end
+Schema.new.change

@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe "StoreSchema" do
 
-  let(:website) { Website.new }
+  let(:website) { Website.create }
 
   describe "nil" do
 
