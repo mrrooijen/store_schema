@@ -1,4 +1,7 @@
+---
+sudo: false
 language: ruby
+cache: bundler
 rvm:
   - 2.5
   - 2.6
@@ -7,4 +10,4 @@ gemfile:
   - .gemfiles/5.2.gemfile
   - .gemfiles/6.0.gemfile
 before_install:
-  - gem install bundler
+  - gem install bundler -v 1.17.2

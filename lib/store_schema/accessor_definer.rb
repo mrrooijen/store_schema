@@ -22,9 +22,9 @@ class StoreSchema::AccessorDefiner
   # @param attribute [Symbol] the name of the {#column}'s attribute
   #
   def initialize(klass, column, type, attribute)
-    @klass = klass
-    @column = column
-    @type = type
+    @klass     = klass
+    @column    = column
+    @type      = type
     @attribute = attribute
   end
 

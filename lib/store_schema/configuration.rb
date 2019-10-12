@@ -11,7 +11,7 @@ class StoreSchema::Configuration
   # @param column [Symbol] the table column to generate the accessors for
   #
   def initialize(column)
-    @column = column
+    @column     = column
     @attributes = {}
   end
 

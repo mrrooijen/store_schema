@@ -1,10 +1,9 @@
 # Store Schema
 
-[![Gem Version](https://badge.fury.io/rb/store_schema.svg)](http://badge.fury.io/rb/store_schema)
-[![Code Climate](https://codeclimate.com/github/mrrooijen/store_schema.png)](https://codeclimate.com/github/mrrooijen/store_schema)
+[![Gem Version](https://badge.fury.io/rb/store_schema.svg)](https://badge.fury.io/rb/store_schema)
 [![Build Status](https://travis-ci.org/mrrooijen/store_schema.svg)](https://travis-ci.org/mrrooijen/store_schema)
 
-StoreSchema, for Rails/ActiveRecord 5.1.0+, enhances `ActiveRecord::Base.store_accessor` with data conversion capabilities.
+StoreSchema enhances `ActiveRecord::Base.store_accessor` with data type conversion capabilities.
 
 This library was developed for- and extracted from [HireFire].
 
@@ -13,8 +12,8 @@ The documentation can be found on [RubyDoc].
 
 ### Compatibility
 
-- Rails/ActiveRecord 5.1.0+
-- Ruby (MRI) 2.5.0+
+- Ruby (MRI) 2.5 ~ 2.6
+- ActiveRecord 5.1 ~ 6.0
 
 
 ### Installation
@@ -28,8 +27,7 @@ gem "store_schema"
 
 ### Example
 
-This example assumes you have a `websites` table with a column named
-`config` of type `text`.
+This example assumes that you have a `websites` table with a `config` column of type `text`.
 
 Define a model and use `store_schema`.
 
@@ -39,11 +37,11 @@ class Website < ActiveRecord::Base
   # Tell ActiveRecord that we want to serialize the :config attribute
   # and store the serialized data as text in the config column.
   #
-  # By default, `store` serializes your data as YAML. You can swap this out for
-  # any other coder you want. For example JSON or Oj (high performance JSON).
+  # By default, `store` serializes your data using the YAML coder. You can
+  # swap the YAML coder out for other coders, such as JSON.
   #
-  # If you're using PostgreSQL's hstore or json column-type instead of the
-  # text column-type, you should'nt define `store :config`.
+  # Note: If you're using PostgresSQL hstore- or json instead of a
+  # plain text column type, don't define `store :config`.
   #
   store :config, coder: JSON
 
@@ -51,10 +49,10 @@ class Website < ActiveRecord::Base
   # ActiveRecord::Migration.
   #
   store_schema :config do |s|
-    s.string :name
-    s.integer :visitors
-    s.float :apdex
-    s.boolean :ssl
+    s.string   :name
+    s.integer  :visitors
+    s.float    :apdex
+    s.boolean  :ssl
     s.datetime :published_at
   end
 end
@@ -65,90 +63,100 @@ the generated accessors.
 
 ```rb
 website = Website.create(
-  name: "Example Website",
-  visitors: 1337,
-  apdex: 1.0,
-  ssl: true,
-  published_at: Time.now
+  :name         => "Example Website",
+  :visitors     => 9001,
+  :apdex        => 1.0,
+  :ssl          => true,
+  :published_at => Time.now
 )
 
-p website.name # => "Example Website" (String)
-p website.visitors # => 1337 (Fixnum)
-p website.apdex # => 1.0 (Float)
-p website.ssl # => true (TrueClass)
-p website.published_at # => "Thu, 18 Sep 2014 23:18:11 +0000" (DateTime)
+website.name         # => (String)    "Example Website"
+website.visitors     # => (Integer)   9001
+website.apdex        # => (Float)     1.0
+website.ssl          # => (TrueClass) true
+website.published_at # => (DateTime)  "Thu, 18 Sep 2014 23:18:11 +0000"
 
-p website.config
+website.config
 # =>
 # {
-#   "name" => "Example Website",
-#   "visitors" => "1337",
-#   "apdex" => "1.0",
-#   "ssl" => "t",
+#   "name"         => "Example Website",
+#   "visitors"     => "9001",
+#   "apdex"        => "1.0",
+#   "ssl"          => "t",
 #   "published_at" => "2014-09-18 23:18:11.583168000"
 # }
 ```
 
-That's it. This is similar to just using `store_accessor`, except that
-`store_schema` is more strict as to what data types are stored. It attempts
-to stay consistent with ActiveRecord's column conventions such as storing
-booleans (`0`, `"0"`, `1`, `"1"`, `"t"`, `"T"`, `"f"`, `"F"`, `true`,
-`"true"`, `"TRUE"`, `false`, `"false"`, `"FALSE"`, `"on"`, `"ON"`, `"off"`,
-`"OFF"`) as `"t"` and `"f"`, storing `Time`, `Date` as `DateTime`,
-ensuring `Time` is UTC prior to being stored, and more.
+This is similar to using ActiveRecord's built-in `store_accessor`, except
+that `store_schema` is more strict about which data types are stored. It attempts
+to remain consistent with ActiveRecord's regular column storage conventions.
 
-When accessing stored data, it properly converts them to their data types.
-For example, `"t"` is converted to a TrueClass, and
-`"2014-09-18 23:18:11.583168000"` is converted back to a DateTime.
-See above example.
+* String
+    * Assigned as: `String`
+    * Stored as: `String`
+    * Retrieved as: `String`
+* Integer
+    * Assigned as: `Integer`
+    * Stored as: `String`
+    * Retrieved as: `Integer`
+* Float
+    * Assigned as: `Float`
+    * Stored as: `String`
+    * Retrieved as: `Float`
+* Boolean (TrueClass)
+    * Assigned as: `1`, `"1"`, `"t"`, `"T"`, `true`, `"true"`, `"TRUE"`, `"on"`, `"ON"`
+    * Stored as: `"t"`
+    * Retrieved as: `true`
+* Boolean (FalseClass)
+    * Assigned as: `0`, `"0"`, `"f"`, `"F"`, `false`, `"false"`, `"FALSE"`, `"off"`, `"OFF"`
+    * Stored as: `"f"`
+    * Retrieved as: `false`
+* DateTime
+    * Assigned as: `Date`, `Time`, `DateTime`
+    * Stored as: `"2014-09-18 23:18:11.583168000"` (using UTC time zone)
+    * Retrieved as: `DateTime`
 
-If you need to be able to query these serialized attributes,
-consider using [PostgreSQL's HStore Extension]. If you do not need to
-be able to query the serialized data, you can simply use a text-type column
-and use the `store <column>[, coder: JSON]` method in your model which works
-with any SQL database.
+If you need to be able to query these serialized attributes, consider using
+the PostgreSQL hstore extension. Otherwise, you can simply use a text column type
+and define `store <column>[, coder: JSON]` in your model and it should work with
+any ActiveRecord-compatible database.
 
 
 ### Contributing
 
 Contributions are welcome, but please conform to these requirements:
 
-- Ruby (MRI) 2.5.0+
-- ActiveRecord 5.1.0+
-- 100% Spec Coverage
-  - Generated by when running the test suite
-- 100% [Passing Specs]
-  - Run test suite with `$ rspec spec`
-- 4.0 [Code Climate Score]
-  - Run `$ rubycritic lib` to generate the score locally and receive tips
-  - No code smells
-  - No duplication
+- Ruby (MRI) 2.5 ~ 2.6
+- ActiveRecord 5.1 ~ 6.0
+- 100% Test Coverage
+    - Coverage results are generated after each test run at `coverage/index.html`
+- 100% Passing Tests
+    - Run test suite with `$ rake test`
 
 To start contributing, fork the project, clone it, and install the development dependencies:
 
 ```
-git clone git@github.com:USERNAME/store_schema.git
-cd store_schema
-bundle
+$ git clone git@github.com:USERNAME/store_schema.git
+$ cd store_schema
+$ bundle
 ```
 
-Ensure that everything works:
+To run the tests:
 
 ```
-rspec spec
-rubycritic lib
+$ rake test
 ```
 
 To run the local documentation server:
 
 ```
-yard server --reload
+$ rake doc
 ```
 
-Create a new branch and start hacking:
+Create a new branch to start contributing:
 
 ```
-git checkout -b my-contributions
+$ git checkout -b my-contribution master
 ```
 
 Submit a pull request.
@@ -159,10 +167,7 @@ Submit a pull request.
 Released under the [MIT License] by [Michael van Rooijen].
 
 [Michael van Rooijen]: https://twitter.com/mrrooijen
-[HireFire]: http://hirefire.io
+[HireFire]: https://www.hirefire.io
 [Passing Specs]: https://travis-ci.org/mrrooijen/store_schema
-[Code Climate Score]: https://codeclimate.com/github/mrrooijen/store_schema
-[RubyDoc]: http://rubydoc.info/github/mrrooijen/store_schema/master/frames
+[RubyDoc]: https://rubydoc.info/github/mrrooijen/store_schema/master/frames
 [MIT License]: https://github.com/mrrooijen/store_schema/blob/master/LICENSE
-[RubyGems.org]: https://rubygems.org/gems/store_schema
-[PostgreSQL's HStore Extension]: http://www.postgresql.org/docs/9.3/static/hstore.html

@@ -9,11 +9,11 @@ class StoreSchema::Converter
   #   and the converter classes.
   #
   MAPPING = {
-    string: String,
-    integer: Integer,
-    float: Float,
-    datetime: DateTime,
-    boolean: Boolean
+    :string   => String,
+    :integer  => Integer,
+    :float    => Float,
+    :datetime => DateTime,
+    :boolean  => Boolean,
   }
 
   # @return [Object]
@@ -29,7 +29,7 @@ class StoreSchema::Converter
   #
   def initialize(value, type)
     @value = value
-    @type = type
+    @type  = type
   end
 
   # Converts {#value} from a Ruby-type value to a database-storable value.

@@ -11,14 +11,14 @@ module StoreSchema::Module
     #   # Gemfile
     #   gem "store_schema"
     #
-    #   # app/models/project.rb
+    #   # app/models/website.rb
     #   class Website < ActiveRecord::Base
     #
     #     store_schema :config do |s|
-    #       s.string :name
-    #       s.integer :visitors
-    #       s.float :apdex
-    #       s.boolean :ssl
+    #       s.string   :name
+    #       s.integer  :visitors
+    #       s.float    :apdex
+    #       s.boolean  :ssl
     #       s.datetime :published_at
     #     end
     #   end
