@@ -1,3 +1,8 @@
+## Master
+
+* Made all String objects immutable
+
+
 ## v1.1.0
 
 * Added support for Ruby 2.5 and 2.6

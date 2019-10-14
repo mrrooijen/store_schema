@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "base"
 
 class StoreSchema::Converter::Integer < StoreSchema::Converter::Base

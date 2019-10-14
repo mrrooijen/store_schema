@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module StoreSchema
   require_relative "store_schema/accessor_definer"
   require_relative "store_schema/configuration"
