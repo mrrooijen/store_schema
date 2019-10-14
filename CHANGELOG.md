@@ -1,4 +1,4 @@
-## Master
+## v1.1.1
 
 * Made all String objects immutable
 
