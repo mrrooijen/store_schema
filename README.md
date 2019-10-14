@@ -12,8 +12,11 @@ The documentation can be found on [RubyDoc].
 
 ### Compatibility
 
-- Ruby (MRI) 2.5 ~ 2.6
+- Ruby 2.5 ~ 2.6
 - ActiveRecord 5.1 ~ 6.0
+
+It's likely that all ActiveRecord-supported databases will work.
+However, we currently only test against PostgreSQL, MySQL and SQLite.
 
 
 ### Installation
@@ -140,6 +143,12 @@ $ git clone git@github.com:USERNAME/store_schema.git
 $ cd store_schema
 $ bundle
 ```
+
+Tests are run against the following databases, so be sure they're installed prior to running the tests:
+
+* PostgreSQL
+* MySQL
+* SQLite
 
 To run the tests:
 

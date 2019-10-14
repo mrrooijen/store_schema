@@ -1,10 +1,18 @@
 require "test_helper"
 
-models = [WebsiteJSON, WebsiteYAML]
+models = [
+  PostgreSQLJSONWebsite,
+  PostgreSQLYAMLWebsite,
+  PostgreSQLHStoreWebsite,
+  MySQLJSONWebsite,
+  MySQLYAMLWebsite,
+  SQLiteJSONWebsite,
+  SQLiteYAMLWebsite,
+]
 
-describe StoreSchema do
+models.each do |model|
 
-  models.each do |model|
+  describe "StoreSchema with #{model}" do
 
     describe "nil" do
 

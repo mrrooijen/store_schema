@@ -24,6 +24,8 @@ GEM
       concurrent-ruby (~> 1.0)
     json (2.2.0)
     minitest (5.12.2)
+    mysql2 (0.5.2)
+    pg (1.1.4)
     rake (13.0.0)
     simplecov (0.17.1)
       docile (~> 1.1)
@@ -43,6 +45,8 @@ PLATFORMS
 DEPENDENCIES
   bundler
   minitest
+  mysql2
+  pg
   rake
   simplecov
   sqlite3
