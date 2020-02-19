@@ -1,7 +1,7 @@
 # Store Schema
 
 [![Gem Version](https://badge.fury.io/rb/store_schema.svg)](https://badge.fury.io/rb/store_schema)
-[![Build Status](https://travis-ci.org/mrrooijen/store_schema.svg)](https://travis-ci.org/mrrooijen/store_schema)
+[![Test Status](https://github.com/mrrooijen/store_schema/workflows/Test/badge.svg)](https://github.com/mrrooijen/store_schema/actions)
 
 StoreSchema enhances `ActiveRecord::Base.store_accessor` with data type conversion capabilities.
 

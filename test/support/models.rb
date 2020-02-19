@@ -40,7 +40,7 @@ end
 
 class SQLiteModel < CommonModel
   self.abstract_class = true
-  establish_connection(CONNECTIONS[:sqlite])
+  establish_connection(CONNECTIONS[:sqlite3])
 end
 
 class SQLiteJSONWebsite < SQLiteModel

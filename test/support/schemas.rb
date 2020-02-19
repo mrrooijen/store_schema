@@ -1,6 +1,6 @@
 # PostgreSQL
 ActiveRecord::Base.establish_connection(CONNECTIONS[:prepare][:postgresql])
-ActiveRecord::Base.connection.recreate_database(CONNECTIONS[:postgresql][:database])
+ActiveRecord::Base.connection.recreate_database(:store_schema)
 ActiveRecord::Base.establish_connection(CONNECTIONS[:postgresql])
 Class.new(ActiveRecord::Migration[5.1]) do
   def change
@@ -22,7 +22,7 @@ end.new.change
 
 # MySQL
 ActiveRecord::Base.establish_connection(CONNECTIONS[:prepare][:mysql])
-ActiveRecord::Base.connection.recreate_database(CONNECTIONS[:mysql][:database])
+ActiveRecord::Base.connection.recreate_database(:store_schema)
 ActiveRecord::Base.establish_connection(CONNECTIONS[:mysql])
 Class.new(ActiveRecord::Migration[5.1]) do
   def change
@@ -37,8 +37,9 @@ Class.new(ActiveRecord::Migration[5.1]) do
 end.new.change
 
 # SQLite
-File.delete(CONNECTIONS[:sqlite][:database]) if File.exist?(CONNECTIONS[:sqlite][:database])
-ActiveRecord::Base.establish_connection(CONNECTIONS[:sqlite])
+db_file = "tmp/store_schema.sqlite3"
+File.exist?(db_file) && File.delete(db_file)
+ActiveRecord::Base.establish_connection(CONNECTIONS[:sqlite3])
 Class.new(ActiveRecord::Migration[5.1]) do
   def change
     create_table :sq_lite_yaml_websites do |t|
