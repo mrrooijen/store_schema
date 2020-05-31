@@ -31,7 +31,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
       mysql:
-        image: mysql:5.7
+        image: mysql:8
         env:
           MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: root
@@ -54,7 +54,9 @@ jobs:
           sudo apt-get -yqq install libsqlite3-dev
       - name: "Prepare MySQL database"
         run: |
-          mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS store_schema;'
+          mysql -uroot -h127.0.0.1 -P $MYSQL_PORT -proot -e 'CREATE DATABASE IF NOT EXISTS store_schema;'
+        env:
+          MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
       - name: Run tests
         run: |
           gem install bundler
@@ -62,3 +64,4 @@ jobs:
           bundle exec rake
         env:
           BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+          MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
