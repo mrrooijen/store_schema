@@ -13,9 +13,9 @@ jobs:
           - 2.6
           - 2.7
         gemfile:
-          - .gemfiles/5.1.gemfile
-          - .gemfiles/5.2.gemfile
-          - .gemfiles/6.0.gemfile
+          - gemfiles/5.1.gemfile
+          - gemfiles/5.2.gemfile
+          - gemfiles/6.0.gemfile
     services:
       postgres:
         image: postgres:12
