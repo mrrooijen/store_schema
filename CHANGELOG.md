@@ -1,3 +1,10 @@
+## v2.0.0
+
+* Add support for Ruby 3
+* Add support for Active Record 6.1
+* Drop support for Active Record 5
+
+
 ## v1.1.1
 
 * Made all String objects immutable

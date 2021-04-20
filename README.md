@@ -13,7 +13,7 @@ The documentation can be found on [RubyDoc].
 ### Compatibility
 
 - Ruby 2.5+
-- ActiveRecord 5.1+
+- ActiveRecord 6.0+
 
 It's likely that all ActiveRecord-supported databases will work.
 However, we currently only test against PostgreSQL, MySQL and SQLite.
@@ -130,7 +130,7 @@ any ActiveRecord-compatible database.
 Contributions are welcome, but please conform to these requirements:
 
 - Ruby (MRI) 2.5+
-- ActiveRecord 5.1+
+- ActiveRecord 6.0+
 - 100% Test Coverage
     - Coverage results are generated after each test run at `coverage/index.html`
 - 100% Passing Tests

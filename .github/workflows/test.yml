@@ -12,10 +12,10 @@ jobs:
           - 2.5
           - 2.6
           - 2.7
+          - 3.0
         gemfile:
-          - gemfiles/5.1.gemfile
-          - gemfiles/5.2.gemfile
           - gemfiles/6.0.gemfile
+          - gemfiles/6.1.gemfile
     services:
       postgres:
         image: postgres:12
@@ -23,9 +23,9 @@ jobs:
           - 5432:5432
         options: >-
           --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
         env:
           POSTGRES_USER: runner
           POSTGRES_PASSWORD: postgres
@@ -33,7 +33,8 @@ jobs:
       mysql:
         image: mysql:8
         env:
-          MYSQL_USER: root
+          MYSQL_USER: store_schema
+          MYSQL_PASSWORD: store_schema
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: store_schema
         ports:
@@ -42,7 +43,7 @@ jobs:
           --health-cmd="mysqladmin ping"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=3
+          --health-retries=5
     steps:
       - uses: actions/checkout@v2
       - name: Use Ruby ${{ matrix.ruby }}
