@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    store_schema (1.1.1)
+    store_schema (2.0.0)
       activerecord (>= 6.0.0)
 
 GEM
